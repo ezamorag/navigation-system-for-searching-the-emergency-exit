@@ -1,0 +1,19 @@
+<!-- -->
+<!-- WATCH OUT!!! First run the brain_v2 -->
+<launch>
+
+   <!-- Start robot node -->
+   <node name="irobot_create" pkg="irobot_create_2_1" type="driver.py" />
+   
+   <!-- Start Kinect node --> 
+   <include file="$(find openni_launch)/launch/openni.launch">
+      <arg name="depth_registration" value="true" />
+   </include> 
+   <node name="kinect_aux_node" pkg="kinect_aux" type="kinect_aux_node" />
+   
+   <!-- Start Find_Emergency_Sign package -->
+   <node name="signdetector_v1" pkg="find_emergency_exit" type="signdetector_v1" />
+   <node name="controller_direction" pkg="find_emergency_exit" type="controller_direction" />
+   <node name="signsearcher_v1" pkg="find_emergency_exit" type="signsearcher_v1" />
+
+</launch>

@@ -1,0 +1,20 @@
+<!-- -->
+
+<launch>
+
+   <!-- Start robot node -->
+   <group>
+      <remap from="tf" to="tf_irobot"/>
+      <node name="irobot_create" pkg="irobot_create_2_1" type="driver.py" />
+   </group>
+   
+   <!-- Start Kinect node --> 
+   <include file="$(find openni_launch)/launch/openni.launch">
+      <arg name="depth_registration" value="true" />
+   </include> 
+  
+   
+   <node name="signdetector_v1" pkg="find_emergency_exit" type="signdetector_v1" />
+   <node name="controller_direction" pkg="find_emergency_exit" type="controller_direction" />
+
+</launch>

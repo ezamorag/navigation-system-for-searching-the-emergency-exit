@@ -1,0 +1,24 @@
+<!-- -->
+<launch>
+
+   <!-- Start robot node -->
+   <group>
+      <remap from="tf" to="tf_irobot"/>
+      <node name="irobot_create" pkg="irobot_create_2_1" type="driver.py" />
+   </group>
+   
+   <!-- Start Kinect node --> 
+   <include file="$(find openni_launch)/launch/openni.launch">
+      <arg name="depth_registration" value="true" />
+   </include> 
+
+   <!-- Start node to convert steering commands -->
+   <node name="cloud2laser" pkg="kinect_to_laser_data1" type="cloud2laser" />
+
+   <!-- TF broadcaster -->
+   <node name="odometry_converter" pkg="odometry_converter" type="odometry_converter" />
+
+   <!-- snd method -->
+   <node name="snd_v1" pkg="find_emergency_exit" type="snd_v1" />
+
+</launch>

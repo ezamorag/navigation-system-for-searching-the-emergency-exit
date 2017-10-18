@@ -1,0 +1,34 @@
+<!-- Launch first the gmapping.launch -->
+<launch>
+
+   <!-- Start robot node -->
+   <group>
+      <remap from="tf" to="tf_irobot"/>
+      <node name="irobot_create" pkg="irobot_create_2_1" type="driver.py" />
+   </group> 
+ 
+   <!-- Start Kinect node --> 
+   <!--IMPORTANT: rosrun dynamic_reconfigure dynparam set /camera/driver data_skip 4 -->
+   <group>
+      <remap from="tf" to="tf_kinect"/>
+      <include file="$(find openni_launch)/launch/openni.launch">
+         <arg name="depth_registration" value="true" />
+      </include> 
+   </group>
+   <node name="kinect_aux_node" pkg="kinect_aux" type="kinect_aux_node" />
+
+   <!-- Fake laser -->
+   <node name="cloud2laser_fee" pkg="kinect_to_laser_data1" type="cloud2laser_fee" /> 
+
+   <!-- TF broadcaster for base_laser -->
+   <node name="odometry_converter" pkg="odometry_converter" type="odometry_converter" />
+
+   <!-- Start Find_Emergency_Sign package -->
+   <node name="planning_v4" pkg="find_emergency_exit" type="planning_v4.py" />  
+   <node name="waypoints_follower_v4" pkg="find_emergency_exit" type="waypoints_follower_v4" /> 
+   <node name="signdetector_v4" pkg="find_emergency_exit" type="signdetector_v4" />
+   <!--<node name="signsearcher_v4" pkg="find_emergency_exit" type="signsearcher_v4" />-->
+
+</launch>
+
+

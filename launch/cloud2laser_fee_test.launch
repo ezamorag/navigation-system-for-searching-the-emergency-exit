@@ -1,0 +1,16 @@
+<!-- -->
+<launch>
+
+   <!-- Start Kinect node --> 
+   <include file="$(find openni_launch)/launch/openni.launch">
+      <arg name="depth_registration" value="true" />
+   </include>  
+   <node name="kinect_aux_node" pkg="kinect_aux" type="kinect_aux_node" />
+
+   <!-- Start node to convert steering commands -->
+   <node name="cloud2laser_fee" pkg="kinect_to_laser_data1" type="cloud2laser_fee"/>
+
+   <!-- TF broadcaster -->
+   <node name="odometry_converter" pkg="odometry_converter" type="odometry_converter" />
+
+</launch>

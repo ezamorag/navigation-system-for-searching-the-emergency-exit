@@ -1,0 +1,26 @@
+
+
+
+~sigma (float, default: 0.05)
+The sigma used by the greedy endpoint matching
+~kernelSize (int, default: 1)
+The kernel in which to look for a correspondence
+
+
+~lsigma (float, default: 0.075)
+The sigma of a beam used for likelihood computation
+~ogain (float, default: 3.0)
+Gain to be used while evaluating the likelihood, for smoothing the resampling effects
+
+
+~llsamplerange (float, default: 0.01)
+Translational sampling range for the likelihood
+~llsamplestep (float, default: 0.01)
+Translational sampling step for the likelihood
+~lasamplerange (float, default: 0.005)
+Angular sampling range for the likelihood
+~lasamplestep (float, default: 0.005)
+Angular sampling step for the likelihood
+
+
+

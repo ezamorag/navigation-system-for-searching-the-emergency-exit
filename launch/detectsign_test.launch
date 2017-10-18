@@ -1,0 +1,12 @@
+<!-- -->
+
+<launch>
+
+   <!-- Start Kinect node --> 
+   <include file="$(find openni_launch)/launch/openni.launch">
+      <arg name="depth_registration" value="true" />
+   </include> 
+   
+   <node name="kinect_aux_node" pkg="kinect_aux" type="kinect_aux_node" />
+
+</launch>

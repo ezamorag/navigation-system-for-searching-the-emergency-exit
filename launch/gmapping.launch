@@ -1,0 +1,44 @@
+<!-- -->
+
+<launch>
+    <node name="gmapping" pkg="gmapping" type="slam_gmapping"  args="scan:=base_scan" output="screen">
+      
+      <param name="maxUrange" value="6.0"/>   <!-- Must be equal to the laser -->
+      <param name="maxRange" value="6.1"/>
+      <!--param name="throttle_scans" value="1"/-->
+          
+
+       
+      <!-- Updates parameters -->
+      <!-- if it's big (e.g. 20secs), the map seems good, but the robot pose can be really wrong -->
+      <!-- if it's small (e.g. <1sec), the map seems a bit worse, but the robot pose is better -->
+      <param name="map_update_interval" value="0.5"/>   
+       
+      <param name="linearUpdate" value="0.7"/>           <!-- 2.0 y 1.5 para mykitchen2 -->
+      <param name="angularUpdate" value="0.2"/>          <!-- 0.7 y 0.2 para dca_1stfloor y mykitchen1-->
+      <param name="temporalUpdate" value="-1.0"/> 
+
+      <param name="srr" value="0.1"/>     <!--Odometry error in translation as a function of translation (rho/rho) -->   
+      <param name="srt" value="0.2"/>     <!--Odometry error in translation as a function of rotation (rho/theta) --> 
+      <param name="str" value="0.1"/>    <!--Odometry error in rotation as a function of translation (theta/rho) --> 
+      <param name="stt" value="0.2"/>    <!--Odometry error in rotation as a function of rotation (theta/theta) --> 
+
+      <param name="lstep" value="0.05"/>   <!-- The optimization step in translation -->
+      <param name="astep" value="0.05"/>   <!-- The optimization step in rotation -->
+      <param name="iterations" value="5"/>  <!-- The number of iterations of the scanmatcher -->
+
+      <!-- Particle filtering -->
+      <!-- if it's big (e.g. 100particles) or too small (e.g. 5particles), the map is really wrong -->
+      <param name="particles" value="20"/>              
+      <param name="resampleThreshold" value="2.0"/>      <!-- More is better -->
+
+      <!-- Map parameters -->
+      <param name="xmin" value="-20.0"/>      <!-- Less memory is better performance -->
+      <param name="ymin" value="-20.0"/>      <!-- The map can expand by itself when it's needed -->
+      <param name="xmax" value="20.0"/>
+      <param name="ymax" value="20.0"/>
+      <param name="delta" value="0.03"/>       <!-- Important factor to have consistent -->
+    </node>
+
+    <node name="robot_localization_v4" pkg="find_emergency_exit" type="robot_localization_v4" />
+</launch>
