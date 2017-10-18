@@ -1,0 +1,5 @@
+# Detect signs and decide a reliable goal to recognize a sign
+---
+float64 x
+float64 y
+float64 th

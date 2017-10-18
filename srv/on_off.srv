@@ -1,0 +1,5 @@
+# It's a on_off srv
+bool switch1
+---
+bool isDone
+
