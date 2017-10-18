@@ -1,4 +1,4 @@
-# Autonomous navigation in unknown environments guided by emergency signs in the building 
+# Autonomous Navigation in Unknown Environments guided by the Emergency Signs 
 
 I developed a complete navigation system for a differential mobile robot (iRobot). This navigation system is able to find the emergency exit in the building. A demo is shown in the following video 
 
